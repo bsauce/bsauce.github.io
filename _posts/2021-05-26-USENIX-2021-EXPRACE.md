@@ -39,12 +39,7 @@ keywords: Kernel exploit, Paper
 **原因**：内核访问变量有一种常见的模式，这很容易产生多变量竞争漏洞。(i) 先搜索数据位置，例如枚举数据结构（list 或 tree）；(ii) 根据虚地址读取数据或更新数据。
 
 **利用挑战**：通过蛮力攻击，使得T~x~位于T~y~中（假设$T_{Syscall_x} \leq T_{Syscall_y}$）。可通过线段图来进行理解，如果$T_x \geq T_y$（非包含式），则竞争几乎不可能成功。
-$$
-P_{multi}=\begin{cases}
-\frac{T_y - T_x}{T_{Syscall_x}}~~if~T_x \lt T_y  \\
-0~~~~~~~~~~~if~T_x \geq T_y
-\end{cases}
-$$
+![1](\images\posts\ExpRace\1.png)
 **实例-CVE-2017-15265**：见Figure 2。
 
 - 分析：Task~y~采用create命令创建缓冲区port，并插入到`p->list`，对应A点；然后将用户输入拷贝到`port->name`，对应D点。Task~x~采用delete命令释放port，先从`p->list`找到相应的port，对应B点；再释放，对应C点。
@@ -69,13 +64,7 @@ $$
 - （2）若T~x~<T~y'~<T~syscallx~，需保证中断出现在T~y~中间，且T~x~位于T~y'~中间；
 - （3）若T~x~>T~y'~，则很难竞争成功。
 
-$$
-P_{multi}^{EXPRACE}=\begin{cases}
-\frac{T_y}{T_{Syscall_{int}}}~~~~~~~~~~~~~~~~~if~T_{Syscall_x} \leq T_{y'}   \\
-\frac{T_y}{T_{Syscall_{int}}} * \frac{T_{y'} - T_x}{T_{Syscall_{x}}}~~if~T_x \lt T_{y'} \lt T_{Syscall_x}  \\
-~~~~~~0~~~~~~~~~~~~~~~~~~~~~if~T_{Syscall_x} \gt T_{y'}~~and~~ T_x \gt T_{y'}
-\end{cases}
-$$
+![2](\images\posts\ExpRace\2.png)
 
 **中断分类**：主要分为两类。
 （1）硬件中断IRQ（Hardware interrupt request）：通过IO-APIC，从外部硬件设备向OS发送信号；
