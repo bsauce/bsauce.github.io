@@ -1,18 +1,20 @@
 ---
 layout: page
 title: About
-description: 打码改变世界
-keywords: Zhuang Ma, 马壮
+description: Nothing can change your mind
+keywords: bsauce
 comments: true
 menu: 关于
 permalink: /about/
 ---
 
-我是马壮，码而生，码而立。
+我是bsauce，没啥可介绍的。
 
-仰慕「优雅编码的艺术」。
+喜欢C罗，FIFA。
 
-坚信熟能生巧，努力改变人生。
+学习使我头秃。
+
+Email: bsauce0@outlook.com
 
 ## 联系
 
