@@ -1,9 +1,9 @@
 ---
 layout: post
-title: 【bsauce读论文】2022-CCS-DirtyCred: Escalating Privilege in Linux Kernel
+title: 【bsauce读论文】 DirtyCred-内核凭证替换利用技术
 categories: [Paper]
-description: 【bsauce读论文】2022-CCS-DirtyCred: Escalating Privilege in Linux Kernel
-keywords: Kernel exploitation, Paper
+description: 【bsauce读论文】 DirtyCred-内核凭证替换利用技术
+keywords: Kernel exploit, Paper
 ---
 
 # 【bsauce读论文】2022-CCS-DirtyCred: Escalating Privilege in Linux Kernel
