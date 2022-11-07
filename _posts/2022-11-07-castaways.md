@@ -1,7 +1,7 @@
 ---
 layout: post
-title: 【Exploit trick】针对cred结构的cross-cache利用
-categories: CTF
+title: 【Exploit trick】针对cred结构的cross cache利用
+categories: [CTF]
 description: 【Exploit trick】针对cred结构的cross-cache利用(corCTF 2022-cache-of-castaways)
 keywords: Kernel, Exploit
 ---
