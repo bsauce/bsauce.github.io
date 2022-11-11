@@ -1,9 +1,9 @@
 ---
 layout: post
 title: 【Exploit trick】针对cred结构的cross cache利用
-categories: CTF
+categories: Kernel-exploit
 description: 针对cred结构的cross-cache利用
-keywords: Kernel, Exploit
+keywords: CVE, Kernel, Exploit
 ---
 
 
