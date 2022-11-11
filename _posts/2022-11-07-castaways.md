@@ -1,9 +1,9 @@
 ---
 layout: post
 title: 【Exploit trick】针对cred结构的cross cache利用
-categories: Kernel-exploit
+categories: CTF
 description: 针对cred结构的cross-cache利用
-keywords: CVE, Kernel, Exploit
+keywords: Kernel, Exploit
 ---
 
 
@@ -205,7 +205,7 @@ out_free_pgvec:
 - （3）以上的 `vmalloc` 会分配1个 kmalloc-64 来帮助设置 vmalloc 虚拟映射；接着，内核会从 `vmap_area_cachep` 分配2个 `vmap_area` chunk，第1个是调用 [`alloc_vmap_area()`](https://elixir.bootlin.com/linux/v5.18.3/source/mm/vmalloc.c#L1539) 函数分配，第2个可能来自 [`preload_this_cpu_lock()`](https://elixir.bootlin.com/linux/v5.18.3/source/mm/vmalloc.c#L1527) 函数。
 
 - （4）[`copy_process()`](https://elixir.bootlin.com/linux/v5.18.3/source/kernel/fork.c#L1972) ->  [`copy_creds()`](https://elixir.bootlin.com/linux/v5.18.3/source/kernel/cred.c#L340) ，具体会调用 `prepare_creds()` 分配 cred 结构（不能设置 `CLONE_THREAD` flag）。
-
+<!-- {% raw %} -->
   ```c
   int copy_creds(struct task_struct *p, unsigned long clone_flags)
   {
@@ -236,7 +236,7 @@ out_free_pgvec:
       if (!new)
           return -ENOMEM;
   ```
-
+<!-- {% endraw %}) -->
 - （5）[`copy_process()`](https://elixir.bootlin.com/linux/v5.18.3/source/kernel/fork.c#L2219) 之后会调用一系列 `copy_x()` 函数，x 表示进程标识，只要不设置 `CLONE` flag，这些函数就会触发一个分配（通常从这些cache中分配，`files_cache` / `fs_cache` / `sighand_cache` / `signal_cache`）。最大的噪声是在设置 `mm_struct` 时（未设置 `CLONE_VM` flag 时触发），会有一系列的分配，从 `vm_area_struct` / `anon_vma_chain` / `anon_vma` 这些cache中分配。所有这些分配都会从 order-0 page 取内存。
 
   ```c
