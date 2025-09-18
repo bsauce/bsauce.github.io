@@ -8,11 +8,16 @@ menu: 关于
 permalink: /about/
 ---
 
-我是bsauce，没啥可介绍的。
+我是bsauce，某高校小青椒一枚，助理研究员。
 
-喜欢C罗，FIFA。
+喜欢足球、跑步、户外。
 
 学习使我头秃。
+
+不学怎么办呀，论文又发不出来~~
+
+欢迎对**Linux内核漏洞挖掘与利用**的同学联系我，一起研究漏洞实践利用、发论文~~❤
+或者，来读研？（虽然目前还没有招硕士的资格~）
 
 Email: bsauce0@outlook.com
 
@@ -41,3 +46,4 @@ Email: bsauce0@outlook.com
 {% endfor %}
 </div>
 {% endfor %}
+
